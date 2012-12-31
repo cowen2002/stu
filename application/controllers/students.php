@@ -38,16 +38,42 @@ class Students extends CI_Controller{
 		echo json_encode($arrs);
 	}
 
-
-
 	public function update(){
 		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
 		$id = $this->input->get("id");
 		// file_put_contents("./Result1.txt", $StudentNo);
 		$data['s'] = $this->students_model->get_student_by_id($id);
-		file_put_contents("./Result1.txt",var_export($data['s'],true));
+		//file_put_contents("./Result1.txt",var_export($data['s'],true));
 		//$data['rxpc'] = $this->rxpc_model->rxpc_list();
 		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
 		$this->load->view("student_update.html", $data);
 	}
+	
+	public function modify(){
+		$data['StudentNo']  = $this->input->get('StudentNo');
+		$data['Name']       = $this->input->get('Name');
+		$data['Birthday']   = $this->input->get('Birthday');
+		$data['Sex']        = $this->input->get('Sex');
+		$data['ZZMM']       = $this->input->get('ZZMM');
+		$data['JG']         = $this->input->get('JG');
+		$data['SZCS']       = $this->input->get('SZCS');
+		$data['IdCard']     = $this->input->get('IdCard');
+		$data['Phone']      = $this->input->get('Phone');
+		$data['Tel']        = $this->input->get('Tel');
+		$data['GZDW']       = $this->input->get('GZDW');
+		$data['BJName']     = $this->input->get('BJName');
+		$data['XQ']         = $this->input->get('XQ');
+		$data['ZZY']        = $this->input->get('ZZY');
+		$data['Remark1']    = $this->input->get('Remark1');
+		$data['Remark2']    = $this->input->get('Remark2');
+		$data['id']         = $this->input->get('id');
+
+
+
+
+
+		file_put_contents("./Result1.txt", var_export($data,true));
+	}
+	
+	
 }
