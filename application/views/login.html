@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="学员信息管理系统" />
+		<!-- 作者 -->
+		<meta name="revised" content="学员信息管理系统.v1, 2020/04/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="学员信息管理系统" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="学员信息管理系统" />
+		<title>学员信息管理系统</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="shortcut icon" href="<?php echo base_url('application/views/images/favicon.ico');?>"/>
+		<link rel="bookmark" href="<?php echo base_url('application/views/images/favicon.ico');?>"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/base.css');?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/iconfont.css');?>">
+		<script type="text/javascript" src="<?php echo base_url('application/views/framework/jquery-1.11.3.min.js');?>" ></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/layui/css/layui.css');?>">
+	    <!--[if lt IE 9]>
+	      	<script src="framework/html5shiv.min.js"></script>
+	      	<script src="framework/respond.min.js"></script>
+	    <![endif]-->
+		<script type="text/javascript" src="<?php echo base_url('application/views/layui/layui.js');?>"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/jquery.mCustomScrollbar.css');?>">
+		<script src="<?php echo base_url('application/views/framework/jquery-ui-1.10.4.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/jquery.mousewheel.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/jquery.mCustomScrollbar.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/cframe.js');?>"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/login.css');?>">
+		<script type="text/javascript" src="<?php echo base_url('application/views/js/login.js');?>"></script>
+	</head>
+
+	<body>
+		
+		<!--主体 开始-->
+		<div class="login_main">
+			<!--轮播图 开始-->
+			<div class="layui-carousel lbt" id="loginLbt">
+				<div carousel-item>
+					<div class="item" style="background: url(<?php echo base_url('application/views/images/login_bg1.jpg');?>) no-repeat; background-size: cover;"></div>
+					<div class="item" style="background: url(<?php echo base_url('application/views/images/login_bg2.jpg');?>) no-repeat; background-size: cover;"></div>
+				</div>
+			</div>
+			<!--轮播图 结束-->
+			<div class="logo">
+				<div>
+					<h1>学员信息管理系统</h1>
+					<p>版本号:1.0.0.0</p>
+				</div>
+			</div>
+			<div class="form_tzgg">
+				<div class="form">
+					<form action="<?php echo base_url('login/signin');?>" method="post" class="layui-form">
+						<div class="title">用户登录</div>
+						<div class="con" onclick="getFocus(this)">
+							<input type="text" name="username" lay-verify="username" placeholder="请输入您的用户名" autocomplete="off" class="layui-input">
+						</div>
+						<div class="con" onclick="getFocus(this)">
+							<input type="password" name="password" required  lay-verify="passWord" placeholder="请输入您的账户密码" autocomplete="off" class="layui-input">
+						</div>
+						<div class="but">
+							<button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+						</div>
+					</form>
+				</div>
+				<script>
+					layui.use('form', function() {
+						var form = layui.form;
+						form.verify({
+				            userName: function(value, item){ //value：表单的值、item：表单的DOM对象
+				                if(value == null || value == ""){
+				                    return '请输入您的用户名！';
+				                }
+				            },
+				            passWord: function(value, item){ 
+				                if(value == null || value == ""){
+				                    return '请输入您的账户密码！';
+				                }
+				            }
+				        });
+						//监听提交
+						form.on('submit(formDemo)', function(data) {
+							
+							return true;
+						});
+					});
+				</script>
+				<div class="tzgg">
+					<div class="title">通知公告</div>
+					<div class="con">
+						<ul>
+							<li><span>04-01</span><a href="#" target="_blank">运交华盖欲何求，未敢翻身已碰头。</a></li>
+							<li><span>04-01</span><a href="#" target="_blank">破帽遮颜过闹市，漏船载酒泛中流。 </a></li>
+							<li><span>04-01</span><a href="#" target="_blank">横眉冷对千夫指，俯首甘为孺子牛。</a></li>
+							<li><span>04-01</span><a href="#" target="_blank">躲进小楼成一统，管他冬夏与春秋。</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--主体 结束-->
+	</body>
+
+</html>

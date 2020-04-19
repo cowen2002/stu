@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="学员信息管理系统" />
+		<!-- 作者 -->
+		<meta name="revised" content="学员信息管理系统.v1, 2020/04/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="学员信息管理系统" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="学员信息管理系统" />
+		<title>学员信息管理系统</title>
+
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/base.css');?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/iconfont.css');?>">
+		<script type="text/javascript" src="<?php echo base_url('application/views/framework/jquery-1.11.3.min.js');?>" ></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/layui/css/layui.css');?>">
+	    <!--[if lt IE 9]>
+	      	<script src="framework/html5shiv.min.js"></script>
+	      	<script src="framework/respond.min.js"></script>
+	    <![endif]-->
+		<script type="text/javascript" src="<?php echo base_url('application/views/layui/layui.js');?>"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/jquery.mCustomScrollbar.css');?>">
+		<script src="<?php echo base_url('application/views/framework/jquery-ui-1.10.4.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/jquery.mousewheel.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/jquery.mCustomScrollbar.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/cframe.js');?>"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+
+	</head>
+
+	<body>
+		<div class="cBody">
+			<div class="console">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<div class="layui-input-inline">
+							<input type="text" name="name" required lay-verify="required" placeholder="输入分管名称" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-input-inline">
+				        	<input type="text" class="layui-input" id="time" placeholder=" - ">
+						</div>
+						<div class="layui-input-inline">
+		                    <select name="provid" id="provid" lay-filter="provid">
+		                        <option value="">一级分类</option>
+		                    </select>
+		                </div>
+		                <div class="layui-input-inline">
+		                    <select name="cityid" id="cityid" lay-filter="cityid">
+		                        <option value="">二级分类</option>
+		                    </select>
+		                </div>
+						<button class="layui-btn" lay-submit lay-filter="formDemo">检索</button>
+					</div>
+				</form>
+
+				<script>
+					layui.use(['form','laydate'], function() {
+						var form = layui.form;
+						var laydate = layui.laydate;
+				
+						//监听提交
+						form.on('submit(formDemo)', function(data) {
+							layer.msg(JSON.stringify(data.field));
+							return false;
+						});
+						
+						var newDate = new Date();
+						nowTime = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
+						laydate.render({
+						    elem: '#time' 
+					    	,range: '~'
+//					    	,type: 'datetime'	//开启时分秒
+					    	,format: 'yyyy-MM-dd'
+					    	,max: nowTime	//min/max - 最小/大范围内的日期时间值
+						});
+					});
+				</script>
+			</div>
+			
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>学期</th>
+						<th>班级</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+
+
+
+					<tr>
+						<td>龙九山</td>
+						<td>DLS201802281450280741</td>
+						<td>无锡市</td>
+						<td>龙九山</td>
+						<td>龙九山</td>
+						<td>18600001111</td>
+						<td>028-6666666</td>
+						<td>123456789@qq.com</td>
+						<td>
+							<button class="layui-btn layui-btn-xs">修改</button>
+							<button class="layui-btn layui-btn-xs">基本信息</button>
+						</td>
+					</tr>
+					<tr>
+						<td>龙九山</td>
+						<td>DLS201802281450280741</td>
+						<td>无锡市</td>
+						<td>龙九山</td>
+						<td>龙九山</td>
+						<td>18600001111</td>
+						<td>028-6666666</td>
+						<td>123456789@qq.com</td>
+						<td>
+							<button class="layui-btn layui-btn-xs">修改</button>
+							<button class="layui-btn layui-btn-xs">基本信息</button>
+						</td>
+					</tr>
+					<tr>
+						<td>龙九山</td>
+						<td>DLS201802281450280741</td>
+						<td>无锡市</td>
+						<td>龙九山</td>
+						<td>龙九山</td>
+						<td>18600001111</td>
+						<td>028-6666666</td>
+						<td>123456789@qq.com</td>
+						<td>
+							<button class="layui-btn layui-btn-xs">修改</button>
+							<button class="layui-btn layui-btn-xs">基本信息</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<!-- layUI 分页模块 -->
+			<div id="pages"></div>
+			<script>
+				layui.use(['laypage', 'layer'], function() {
+					var laypage = layui.laypage,
+						layer = layui.layer;
+				
+					//总页数大于页码总数
+					laypage.render({
+					    elem: 'pages'
+					    ,count: 100
+					    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+					    ,jump: function(obj){
+					      console.log(obj)
+					    }
+					});
+				});
+			</script>
+		</div>
+	</body>
+
+</html>

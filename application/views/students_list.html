@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="学员信息管理系统" />
+		<!-- 作者 -->
+		<meta name="revised" content="学员信息管理系统.v1, 2020/04/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="学员信息管理系统" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="学员信息管理系统" />
+		<title>学员信息管理系统</title>
+
+		<link rel="shortcut icon" href="<?php echo base_url('application/views/images/favicon.ico');?>"/>
+		<link rel="bookmark" href="<?php echo base_url('application/views/images/favicon.ico');?>"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/base.css');?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/iconfont.css');?>">
+		<script type="text/javascript" src="<?php echo base_url('application/views/framework/jquery-1.11.3.min.js');?>" ></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/layui/css/layui.css');?>">
+	    <!--[if lt IE 9]>
+	      	<script src="framework/html5shiv.min.js"></script>
+	      	<script src="framework/respond.min.js"></script>
+	    <![endif]-->
+		<script type="text/javascript" src="<?php echo base_url('application/views/layui/layui.js');?>"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/jquery.mCustomScrollbar.css');?>">
+		<script src="<?php echo base_url('application/views/framework/jquery-ui-1.10.4.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/jquery.mousewheel.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/jquery.mCustomScrollbar.min.js');?>"></script>
+		<script src="<?php echo base_url('application/views/framework/cframe.js');?>"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+		
+		<style>
+			.layui-table img {
+			    max-width: none;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="cBody">
+			<div class="console">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<div class="layui-input-inline">
+							<input type="text" name="name" id="stuName" lay-verify="" placeholder="输入学员姓名1" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-input-inline">
+							<input type="text" name="gzdw" id="gzdw" lay-verify="" placeholder="输入工作单位" autocomplete="off" class="layui-input">
+						</div>						
+						<div class="layui-input-inline">
+		                    <select name="rxpcSwitch" id="rxpcSwitch" lay-filter="formDemo">
+		                        <option value="">选择学期</option>
+		                        <?php foreach($rxpc as $r): ?>
+							      <option value="<?php echo $r['id']; ?>" ><?php echo $r['Name']; ?></option>
+							    <?php endforeach; ?>
+		                    </select>
+		                </div>
+		                <div class="layui-input-inline">
+		                    <select name="bjSwitch" id="bjSwitch" lay-filter="">
+		                        <option value="">选择班级</option>
+		                    </select>
+		                </div>
+						<button class="layui-btn" type="button" id="searchStu"  lay-submit lay-filter="formDemo">检索</button>
+						<a class="layui-btn">导入商品</a>
+					</div>
+				</form>
+				<script>
+					 layui.use('form', function() {
+					 	var form = layui.form;
+						
+					 	// 监听提交
+					 	// form.on('submit(formDemo)', function(data) {
+					 	// 	layer.msg(JSON.stringify(data.field));
+					 	// 	return true;
+					 	// });
+
+					 	//select change 事件
+					 	form.on('select(formDemo)', function(data) {
+					 		var url = "<?php echo base_url('bj/get_bj_by_rxpcID'); ?>";
+					 		$.get(url, {'rxpcID':data.value}, function(data){$("#bjSwitch").html(data);form.render();});
+					 	});
+					 });
+				</script>
+			</div>
+			
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>学员姓名</th>
+						<th>出生年月</th>
+						<th>单位职务</th>
+						<th>手机号码</th>
+						<th>组织员</th>
+						<th>学期</th>
+						<th>班级</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="studentsTds">
+				</tbody>
+			</table>
+			
+			<!-- layUI 分页模块 -->
+			<div id="pages"></div>
+			<script>
+				layui.use('laypage', function() {
+					var laypage = layui.laypage;
+					var arr = <?php echo json_encode($students);?>;
+			    	var aarr = eval(arr);
+				
+					//总页数大于页码总数
+					laypage.render({
+					    elem: 'pages'
+					    ,count: <?php echo count($students);?>
+					    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+					    ,jump: function(obj){
+					    	var tmpstr = "";
+					    	//console.log("hello");
+					    	for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
+					    		var a = aarr[i+obj.limit*(obj.curr-1)];
+					    		tmpstr += "<tr>";
+								tmpstr += "<td>"+(i+1)+"</td>";
+								tmpstr += "<td>"+a.Name+"</td>";
+								tmpstr += "<td>"+a.Birthday+"</td>";
+								tmpstr += "<td>"+a.GZDW+"</td>";
+								tmpstr += "<td>"+a.Phone+"</td>";
+								tmpstr += "<td>"+a.ZZY+"</td>";
+								tmpstr += "<td>"+a.XQ+"</td>";
+								tmpstr += "<td>"+a.BJ+"</td>";
+								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut()\">修改</button>";
+								tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"specificationsBut()\">规格</button></td>";
+								tmpstr += "</tr>";							
+								
+								
+					    	};
+					    	$("#studentsTds").html(tmpstr);
+//					      console.log(obj)
+					    }
+					});
+				});
+				//修改规格
+				function specificationsBut(){
+					layui.use('layer', function() {
+						var layer = layui.layer;
+						
+						//iframe层-父子操作
+						layer.open({
+							type: 2,
+							area: ['70%', '60%'],
+							fixed: false, //不固定
+							maxmin: true,
+							content: 'specifications_list.html'
+						});
+					});
+					
+				}
+				//修改按钮
+				var updateFrame = null;
+				function updateBut(){
+					layui.use('layer', function() {
+						var layer = layui.layer;
+							
+						//iframe层-父子操作
+						updateFrame = layer.open({
+                    		title: "商品信息修改",
+							type: 2,
+							area: ['70%', '60%'],
+							scrollbar: false,	//默认：true,默认允许浏览器滚动，如果设定scrollbar: false，则屏蔽
+							maxmin: true,
+							content: 'goods_update.html'
+						});
+					});
+					
+				}
+
+				//ajax动态获取学员列表
+			  	$("#searchStu").click(function(){
+			  		var url = "<?php echo base_url('students/search'); ?>";
+			  		// layer.msg($("#stuName").val());
+			  		$.get(url, {'name':$("#stuName").val().toString(),'gzdw':$("#gzdw").val().toString(),'rxpc':$("#rxpcSwitch").val(),'bj':$("#bjSwitch").val()}, function(data){
+						layui.use('laypage', function() {
+							var laypage = layui.laypage;
+					    	var aarr = eval(data);				
+							//总页数大于页码总数
+							laypage.render({
+							    elem: 'pages'
+							    ,count: aarr.length
+							    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+							    ,jump: function(obj){
+							    	var tmpstr = "";
+							    	for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
+							    		var a = aarr[i+obj.limit*(obj.curr-1)];
+							    		tmpstr += "<tr>";
+										tmpstr += "<td>"+(i+1)+"</td>";
+										tmpstr += "<td>"+a.Name+"</td>";
+										tmpstr += "<td>"+a.Birthday+"</td>";
+										tmpstr += "<td>"+a.GZDW+"</td>";
+										tmpstr += "<td>"+a.Phone+"</td>";
+										tmpstr += "<td>"+a.ZZY+"</td>";
+										tmpstr += "<td>"+a.XQ+"</td>";
+										tmpstr += "<td>"+a.BJ+"</td>";
+										tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut()\">修改</button>";
+										tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"specificationsBut()\">规格</button></td>";
+										tmpstr += "</tr>";							
+									};
+							    	$("#studentsTds").html(tmpstr);
+		//					      console.log(obj)
+							    }
+							});//laypage.render
+						});//layui.use
+			  		});
+			  		
+			  	});
+
+				//ajax动态获取班级
+			  	// $("#rxpcSwitch").change(function(){
+			  	// 	var url = "<?php echo base_url('bj/get_bj_by_rxpcID'); ?>";
+			  	// 	alert(url);
+			  	// 	// $.get(url, {'rxpcID':this.value}, function(data){$("#bj").html(data);
+			  	// 	// 	alert(data);
+			  	// 	//});
+			  	// });
+
+
+				// $("#bj").html("<option value=\"333\">第一期省直机关党的建设专题研讨班</option>");
+			</script>
+
+
+
+
+		</div>
+	</body>
+
+</html>
