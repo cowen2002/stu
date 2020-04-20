@@ -9,7 +9,7 @@ class Bj extends CI_Controller{
 	
 	public function index(){
 		$data['bjs'] = $this->bj_model->rxpc_bj_list();
-		file_put_contents("./Result1.txt",var_export($data,true));
+		// file_put_contents("./Result1.txt",var_export($data,true));
 		$this->load->view("bj.html",$data);
 	}
 
@@ -38,6 +38,12 @@ class Bj extends CI_Controller{
 		// 	}	
 		// };
 		// echo json_encode($arrs);
+
+		$arr['rxpcName'] = $this->input->get('rxpcName');
+		$arr['bjName'] = $this->input->get('bjName');
+		$data = $this->bj_model->search_bj($arr);
+		//file_put_contents("./Result1.txt",var_export($data,true));
+		echo json_encode($data);
 	}
 
 
