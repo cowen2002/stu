@@ -15,7 +15,7 @@ class Bj_model extends CI_Model{
 		$sql = "select bj.Id as bjId,bj.Name as bjName,rxpc.id as rxpcId,rxpc.Name as rxpcName
 				from bj, rxpc
 				where bj.IsDel!=1 and rxpc.IsDel!=1 and rxpc.id=bj.RXPC
-				order by rxpc.Name,bj.Name Desc";
+				order by rxpc.Name Desc,bj.Name Desc";
 		$query = $this->db->query($sql);
 		return $query->result_array();		
 	}

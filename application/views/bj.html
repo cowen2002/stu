@@ -43,22 +43,12 @@
 				<form class="layui-form" action="">
 					<div class="layui-form-item">
 						<div class="layui-input-inline">
-							<input type="text" name="name" required lay-verify="required" placeholder="输入分管名称" autocomplete="off" class="layui-input">
+							<input type="text" name="rxpcName" id="rxpcName" lay-verify="" placeholder="输入学期" autocomplete="off" class="layui-input">
 						</div>
 						<div class="layui-input-inline">
-				        	<input type="text" class="layui-input" id="time" placeholder=" - ">
+				        	<input type="text" name="bjName" id="bjName" lay-verify="" placeholder="输入班级" autocomplete="off" class="layui-input">
 						</div>
-						<div class="layui-input-inline">
-		                    <select name="provid" id="provid" lay-filter="provid">
-		                        <option value="">一级分类</option>
-		                    </select>
-		                </div>
-		                <div class="layui-input-inline">
-		                    <select name="cityid" id="cityid" lay-filter="cityid">
-		                        <option value="">二级分类</option>
-		                    </select>
-		                </div>
-						<button class="layui-btn" lay-submit lay-filter="formDemo">检索</button>
+						<button class="layui-btn" type="button" id="searchBj" lay-submit lay-filter="formDemo">检索</button>
 					</div>
 				</form>
 
@@ -95,53 +85,7 @@
 						<th>操作</th>
 					</tr>
 				</thead>
-				<tbody>
-					
-
-
-
-					<tr>
-						<td>龙九山</td>
-						<td>DLS201802281450280741</td>
-						<td>无锡市</td>
-						<td>龙九山</td>
-						<td>龙九山</td>
-						<td>18600001111</td>
-						<td>028-6666666</td>
-						<td>123456789@qq.com</td>
-						<td>
-							<button class="layui-btn layui-btn-xs">修改</button>
-							<button class="layui-btn layui-btn-xs">基本信息</button>
-						</td>
-					</tr>
-					<tr>
-						<td>龙九山</td>
-						<td>DLS201802281450280741</td>
-						<td>无锡市</td>
-						<td>龙九山</td>
-						<td>龙九山</td>
-						<td>18600001111</td>
-						<td>028-6666666</td>
-						<td>123456789@qq.com</td>
-						<td>
-							<button class="layui-btn layui-btn-xs">修改</button>
-							<button class="layui-btn layui-btn-xs">基本信息</button>
-						</td>
-					</tr>
-					<tr>
-						<td>龙九山</td>
-						<td>DLS201802281450280741</td>
-						<td>无锡市</td>
-						<td>龙九山</td>
-						<td>龙九山</td>
-						<td>18600001111</td>
-						<td>028-6666666</td>
-						<td>123456789@qq.com</td>
-						<td>
-							<button class="layui-btn layui-btn-xs">修改</button>
-							<button class="layui-btn layui-btn-xs">基本信息</button>
-						</td>
-					</tr>
+				<tbody id="bjTds">
 				</tbody>
 			</table>
 			
@@ -151,17 +95,71 @@
 				layui.use(['laypage', 'layer'], function() {
 					var laypage = layui.laypage,
 						layer = layui.layer;
+						var arr = <?php echo json_encode($bjs);?>;
+			    		var aarr = eval(arr);
 				
 					//总页数大于页码总数
 					laypage.render({
 					    elem: 'pages'
-					    ,count: 100
+					    ,count: <?php echo count($bjs);?>
 					    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
 					    ,jump: function(obj){
-					      console.log(obj)
+					      var tmpstr = "";
+					    	//console.log("hello");
+					    	for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
+					    		var a = aarr[i+obj.limit*(obj.curr-1)];
+					    		tmpstr += "<tr>";
+								tmpstr += "<td>"+(i+1)+"</td>";
+								tmpstr += "<td>"+a.rxpcName+"</td>";
+								tmpstr += "<td>"+a.bjName+"</td>";
+								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\">修改</button>";
+								tmpstr += "<button class=\"layui-btn layui-btn-xs\" >删除</button></td>";
+								tmpstr += "</tr>";	
+					    	};
+					    	$("#bjTds").html(tmpstr);
 					    }
 					});
 				});
+
+
+		// 		//ajax动态获取班级列表
+		// 	  	$("#searchBj").click(function(){
+		// 	  		var url = "<?php echo base_url('bj/search'); ?>";
+		// 	  		// layer.msg($("#stuName").val());
+		// 	  		$.get(url, {'name':$("#stuName").val().toString(),'gzdw':$("#gzdw").val().toString(),'rxpc':$("#rxpcSwitch").val(),'bj':$("#bjSwitch").val()}, function(data){
+		// 				layui.use('laypage', function() {
+		// 					var laypage = layui.laypage;
+		// 			    	var aarr = eval(data);				
+		// 					//总页数大于页码总数
+		// 					laypage.render({
+		// 					    elem: 'pages'
+		// 					    ,count: aarr.length
+		// 					    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+		// 					    ,jump: function(obj){
+		// 					    	var tmpstr = "";
+		// 					    	for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
+		// 					    		var a = aarr[i+obj.limit*(obj.curr-1)];
+		// 					    		tmpstr += "<tr>";
+		// 								tmpstr += "<td>"+(i+1)+"</td>";
+		// 								tmpstr += "<td>"+a.Name+"</td>";
+		// 								tmpstr += "<td>"+a.Birthday+"</td>";
+		// 								tmpstr += "<td>"+a.GZDW+"</td>";
+		// 								tmpstr += "<td>"+a.Phone+"</td>";
+		// 								tmpstr += "<td>"+a.ZZY+"</td>";
+		// 								tmpstr += "<td>"+a.XQ+"</td>";
+		// 								tmpstr += "<td>"+a.BJ+"</td>";
+		// 								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut()\">修改</button>";
+		// 								tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"specificationsBut()\">规格</button></td>";
+		// 								tmpstr += "</tr>";							
+		// 							};
+		// 					    	$("#studentsTds").html(tmpstr);
+		// //					      console.log(obj)
+		// 					    }
+		// 					});//laypage.render
+		// 				});//layui.use
+		// 	  		});
+			  		
+		// 	  	});//$("#searchBj").click(function(){
 			</script>
 		</div>
 	</body>

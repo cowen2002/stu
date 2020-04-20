@@ -8,7 +8,8 @@ class Bj extends CI_Controller{
 	}
 	
 	public function index(){
-		$data['bjs']$this->bj_model->rxpc_bj_list;
+		$data['bjs'] = $this->bj_model->rxpc_bj_list();
+		file_put_contents("./Result1.txt",var_export($data,true));
 		$this->load->view("bj.html",$data);
 	}
 
@@ -19,9 +20,24 @@ class Bj extends CI_Controller{
 		foreach ($arrs as $a) {
 			$html .= "<option value=\"".$a['Id']."\">".$a['Name']."</option>";			
 		};
-		file_put_contents("./Result1.txt",$html);
+		//file_put_contents("./Result1.txt",$html,FILE_APPEND);
 
 		echo $html;
+	}
+
+	public function search(){
+		// $data['name'] = $this->input->get('name');
+		// $data['gzdw'] = $this->input->get('gzdw');
+		// $data['rxpc'] = $this->input->get('rxpc');
+		// $data['bj'] = $this->input->get('bj');
+		// file_put_contents("./Result1.txt",var_export($data,true));
+		// $arrs = $this->students_model->search_students($data);
+		// foreach ($arrs as &$a) {
+		// 	if(''!=$a['Birthday']){
+		// 		$a['Birthday'] = strstr($a['Birthday'], ' ', true);	
+		// 	}	
+		// };
+		// echo json_encode($arrs);
 	}
 
 
