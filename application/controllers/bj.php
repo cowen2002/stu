@@ -34,9 +34,34 @@ class Bj extends CI_Controller{
 	}
 
 	public function add(){
-
-		$this->load->view("bj_add.html");
+		$data['rxpc'] = $this->rxpc_model->rxpc_list();
+		$this->load->view("bj_add.html", $data);
 	}
 
+	public function addBj(){
+		$arr['RXPC'] = $this->input->get('rxpcId');
+		$arr['Name'] = $this->input->get('bjName');
+		if($arr['RXPC']==''){
+			echo "请选择学期！";
+			return;
+		}
+		if($arr['Name']==''){
+			echo "请输入班级名称！";
+			return;
+		}
+		// file_put_contents("./Result1.txt",var_export($arr,true));
+		$re = $this->bj_model->insert($arr);
+		switch($re){
+			case 1:
+				echo "新建班级".$arr['Name']."成功！";
+				break;
+			case 2:
+				echo "本学期中，班级已存在，请换个名字。";
+				break;
+			default:
+				echo "新建班级失败，请重试！";
+				break;
+		}
+	}
 
 }

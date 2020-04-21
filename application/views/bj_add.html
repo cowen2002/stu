@@ -43,15 +43,15 @@
 		<div class="cBody">
 			<form id="addForm" class="layui-form" action="">
 				<div class="layui-form-item">
-                    <select name="rxpcSwitch" id="rxpcSwitch" lay-filter="">
-                        <option value="">选择学期</option>
-                        <?php foreach($rxpc as $r): ?>
-					      <option value="<?php echo $r['id']; ?>" ><?php echo $r['Name']; ?></option>
-					    <?php endforeach; ?>
-                    </select>
-                </div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">班级</label>
+					<div class="layui-input-inline">
+						<select name="rxpcSwitch" id="rxpcSwitch" lay-filter="">
+	                        <option value="">选择学期</option>
+	                        <?php foreach($rxpc as $r): ?>
+						      <option value="<?php echo $r['id']; ?>" ><?php echo $r['Name']; ?></option>
+						    <?php endforeach; ?>
+	                    </select>
+                	</div>
+                <label class="layui-form-label">班级</label>
 					<div class="layui-input-inline shortInput">
 						<input type="text" name="bjName" id="bjName" lay-verify="" placeholder="输入要新建的班级名" autocomplete="off" class="layui-input">
 					</div>
@@ -63,23 +63,10 @@
 				</div>
 			</form>
 			
-			<!-- 三级省市 插件 -->
-    		<script src="../../framework/area.js"></script>
-			<script src="../../framework/province.js"></script>
 			<script>
-				//默认城市为：宁夏 - 银川
-		        var defaults = {
-		            s1: 'provid',
-		            s2: 'cityid',
-		            s3: 'areaid',
-		            v1: 510000,
-		            v2: 510100,
-		            v3: null
-		        };
-
-		        $("#addRxpcBtn").click(function(){
-			  		var url = "<?php echo base_url('rxpc/addRxpc'); ?>";
-			  		$.get(url, {'rxpcName':$("#rxpcName").val().toString()}, function(data){
+		        $("#addbjBtn").click(function(){
+			  		var url = "<?php echo base_url('bj/addBj'); ?>";
+			  		$.get(url, {'rxpcId':$("#rxpcSwitch").val().toString(), 'bjName':$("#bjName").val().toString()}, function(data){
 			  			layer.msg(data);
 			  		});
 			  	});

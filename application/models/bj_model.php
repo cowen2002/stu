@@ -31,4 +31,17 @@ class Bj_model extends CI_Model{
 		return $query->result_array();		
 	}
 
+	public function insert($arr){
+		// $sql = 'select StudentNo,Name,Birthday,Phone,GZDW,ZZY,BJ from student where IsDel!=1';
+		$this->db->where($arr);
+		$query = $this->db->get('bj');
+		// file_put_contents("./Result1.txt",var_export($query->result(),true));
+		if(count($query->result())>0){
+			return 2;
+		}
+		return $this->db->insert('bj', $arr);
+	}
+
+
+
 }

@@ -1,14 +1,4 @@
 array (
-  0 => 
-  stdClass::__set_state(array(
-     'id' => '5',
-     'Name' => '2017年秋季学期',
-     'IsDel' => '0',
-  )),
-  1 => 
-  stdClass::__set_state(array(
-     'id' => '58',
-     'Name' => '2017年秋季学期',
-     'IsDel' => '0',
-  )),
+  'rxpcId' => '40',
+  'bjName' => '1234',
 )
