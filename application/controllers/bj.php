@@ -5,6 +5,7 @@ class Bj extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('bj_model');
+		$this->load->model('rxpc_model');
 	}
 	
 	public function index(){
@@ -30,6 +31,11 @@ class Bj extends CI_Controller{
 		$data = $this->bj_model->search_bj($arr);
 		//file_put_contents("./Result1.txt",var_export($data,true));
 		echo json_encode($data);
+	}
+
+	public function add(){
+
+		$this->load->view("bj_add.html");
 	}
 
 
