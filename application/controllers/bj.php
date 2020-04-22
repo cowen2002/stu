@@ -64,4 +64,9 @@ class Bj extends CI_Controller{
 		}
 	}
 
+	public function update(){
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		$this->load->view("bj_update.html");
+	}
+
 }
