@@ -58,21 +58,31 @@ $(function(){
 function cframeInit(){
 	var win_h = $(window).height();
 	var conheight;
+    var tmp;
+    console.log("kuangwei---cframeInit() win_h",win_h);
 	try{
 		conheight = $('#mainIframe',parent.document).parents(".frameMain").find(".con").height();
+        console.log("kuangwei---cframeInit() conheight 1",conheight);
+        tmp = $('#mainIframe',parent.document).parents().map(function(){return this.className}).get().join(",");
+        console.log("kuangwei---cframeInit() parents 1",tmp);
 	}catch(e){
 		conheight = win_h;
+        console.log("kuangwei---cframeInit() conheight 2",conheight);
 	}
-	
+	if(conheight==null) conheight = win_h;
 	var fullScreenTAG = sessionStorage.getItem("fullScreenTAG");
 	if(fullScreenTAG == 1){
 		conheight = $(parent.document).height();
+        console.log("kuangwei---cframeInit() conheight 3",conheight);
 	}
 	
 	//计算Iframe的高度与父元素相同
 	$('#mainIframe',parent.document).css("height",conheight);
 	//计算Iframe内cBody的高度，使其固定
 	$(".cBody").height(conheight - 20);
+    console.log("kuangwei---cframeInit() conheight 4",$(".cBody").height());
+    
+    
 	//为cBody设置滚动条的样式
 	$(".cBody").mCustomScrollbar();
 }

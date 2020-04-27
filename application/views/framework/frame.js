@@ -54,7 +54,7 @@ function menuCAClick(url,_this){
 	
 	//处理frameMain url地址
 	$("#mainIframe").attr("src",url);
-	
+	console.log("kuangwei---menuCAClick() ");
 	//处理frameMain title名称变化
 	if($(_this).find("i").attr("class") == "iconfont icon-yonghu1"){
 		$("#frameMainTitle span").html('<i class="iconfont icon-xianshiqi"></i>个人资料');
