@@ -49,7 +49,7 @@
 			
 
 			<form id="addForm" class="layui-form" action="">
-				<div class="layui-form-item">
+				<!-- <div class="layui-form-item">
 					<label class="layui-form-label">商品名称</label>
 					<div class="layui-input-block">
 						<input type="text" name="goodsName" required lay-verify="required" autocomplete="off" class="layui-input">
@@ -98,28 +98,42 @@
 						<input type="radio" name="sfpfsp" value="nan" title="是">
 						<input type="radio" name="sfpfsp" value="nv" title="否" checked>
 					</div>
-				</div>
+				</div> -->
 				<div class="layui-form-item">
-					<label class="layui-form-label">分类</label>
+					<label class="layui-form-label">学期</label>
 	                <div class="layui-input-inline">
-	                    <select name="provid" id="provid" lay-filter="provid">
-	                        <option value="">一级分类</option>
+	                    <select name="xq" id="xq" lay-filter="xq">
+	                    	<?php
+	                    		foreach($rxpc as $v){
+	                    			if($bj['rxpcId']==$v['id']){
+	                    				echo "<option value=$v['id'] selected="selected">"
+	                    			}
+	                    		}
+	                    	?>	
+
+	                        <?php foreach($rxpc as $v){?>
+	                        	
+									<option value="<?php echo $v['id'];?>"> <?php echo $v['Name'];?></option>
+								
+	                        <?php };?>
 	                    </select>
 	                </div>
-	                <div class="layui-input-inline">
-	                    <select name="cityid" id="cityid" lay-filter="cityid">
-	                        <option value="">二级分类</option>
-	                    </select>
-	                </div>
 				</div>
 				<div class="layui-form-item">
+					<label class="layui-form-label">班级</label>
+					<div class="layui-input-inline">
+						<input type="text" name="goodsName" required lay-verify="required" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				
+
+		<!-- 		<div class="layui-form-item">
 					<label class="layui-form-label">状态</label>
 					<div class="layui-input-block">
 						<input type="radio" name="sex" value="nan" title="启用">
 						<input type="radio" name="sex" value="nv" title="禁用" checked>
 					</div>
-				</div>
-				
+				</div> -->
 				<div class="layui-form-item">
 					<div class="layui-input-block">
 						<button class="layui-btn" lay-submit lay-filter="submitBut">立即提交</button>

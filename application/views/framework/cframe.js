@@ -61,9 +61,9 @@ function cframeInit(){
     var tmp;
 	try{
 		conheight = $('#mainIframe',parent.document).parents(".frameMain").find(".con").height();
-        tmp = $('#mainIframe',parent.document).parents().map(function(){return this.className}).get().join(",");
-        console.log("kuangwei---cframeInit() parent",$('#mainIframe',parent.document).parents(".frameMain").find(".con"));        
-        console.log("kuangwei---cframeInit() tmp",tmp);        
+        // tmp = $('#mainIframe',parent.document).parents().map(function(){return this.className}).get().join(",");
+        // console.log("kuangwei---cframeInit() parent",$('#mainIframe',parent.document).parents(".frameMain").find(".con"));        
+        // console.log("kuangwei---cframeInit() tmp",tmp);        
 	}catch(e){
 		conheight = win_h;
     }

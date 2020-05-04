@@ -42,6 +42,14 @@ class Bj_model extends CI_Model{
 		return $this->db->insert('bj', $arr);
 	}
 
+	public function get_bj_by_id($id){
+		$sql = "select bj.Id as bjId,bj.Name as bjName,bj.RXPC as rxpcId,rxpc.Name as rxpcName
+				from bj, rxpc
+				where bj.IsDel!=1 and rxpc.IsDel!=1 and bj.Id=".$id." and rxpc.id=bj.RXPC";
+		$query = $this->db->query($sql);
+		return $query->row();
+	}
+
 
 
 }

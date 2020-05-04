@@ -1,4 +1,6 @@
-array (
-  'rxpcId' => '40',
-  'bjName' => '1234',
-)
+stdClass::__set_state(array(
+   'bjId' => '333',
+   'bjName' => '第一期省直机关党的建设专题研讨班',
+   'rxpcId' => '41',
+   'rxpcName' => '2019年春季学期',
+))

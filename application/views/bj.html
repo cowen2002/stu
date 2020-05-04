@@ -44,8 +44,6 @@
 				        	<input type="text" name="bjName" id="bjName" lay-verify="" placeholder="输入班级" autocomplete="off" class="layui-input">
 						</div>
 						<button class="layui-btn" type="button" id="searchBj" lay-submit lay-filter="formDemo">检索</button>
-						<button class="layui-btn" type="button" id="searchBj1" lay-submit lay-filter="formDemo" onclick="updateBut()">检索1</button>
-						
 					</div>
 				</form>
 
@@ -109,7 +107,7 @@
 								tmpstr += "<td>"+(i+1)+"</td>";
 								tmpstr += "<td>"+a.rxpcName+"</td>";
 								tmpstr += "<td>"+a.bjName+"</td>";
-								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" bjId=\""+a.bjId+"\" onclick=\"updateBut()\">修改</button>";
+								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" bjId=\""+a.bjId+"\" onclick=\"updateBut("+a.bjId+")\">修改</button>";
 								tmpstr += "<button class=\"layui-btn layui-btn-xs\" bjId=\""+a.bjId+"\">删除</button></td>";
 								tmpstr += "</tr>";	
 					    	};
@@ -138,7 +136,7 @@
 										tmpstr += "<td>"+(i+1)+"</td>";
 										tmpstr += "<td>"+a.rxpcName+"</td>";
 										tmpstr += "<td>"+a.bjName+"</td>";
-										tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" bjId=\""+a.bjId+"\" onclick=\"updateBut()\">修改</button>";
+										tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" bjId=\""+a.bjId+"\" onclick=\"updateBut("+a.bjId+")\">修改</button>";
 										tmpstr += "<button class=\"layui-btn layui-btn-xs\" bjId=\""+a.bjId+"\">删除</button></td>";
 										tmpstr += "</tr>";	
 							    	};//for
@@ -151,13 +149,14 @@
 			  		
 			  	//修改按钮
 			  	var updateFrame = null;
-				function updateBut(){
+				function updateBut(e){
 					
 
 					
 					layui.use('layer', function() {
 						var layer = layui.layer;
-							
+						var tmp = "<?php echo base_url('bj/update?bjId="+e+"');?>";
+						console.log("kuangwei---tmp is ", tmp);	
 						//iframe层-父子操作
 						updateFrame = layer.open({
                     		title: "商品信息修改",
@@ -165,8 +164,7 @@
 							area: ['70%', '60%'],
 							scrollbar: false,	//默认：true,默认允许浏览器滚动，如果设定scrollbar: false，则屏蔽
 							maxmin: true,
-							content: "<?php echo base_url('bj/update');?>",
-							hello:"hello"
+							content: tmp
 						});
 					});
 				}	
