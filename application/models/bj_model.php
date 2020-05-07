@@ -47,7 +47,7 @@ class Bj_model extends CI_Model{
 				from bj, rxpc
 				where bj.IsDel!=1 and rxpc.IsDel!=1 and bj.Id=".$id." and rxpc.id=bj.RXPC";
 		$query = $this->db->query($sql);
-		return $query->row();
+		return $query->row_array();
 	}
 
 
