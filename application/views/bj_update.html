@@ -66,7 +66,7 @@
 				</div>
 				<div class="layui-form-item">
 					<div class="layui-input-block">
-						<button class="layui-btn" lay-submit lay-filter="submitBut">立即提交</button>
+						<button class="layui-btn" type="button" lay-submit lay-filter="submitBut">立即提交</button>
 					</div>
 				</div>
 			</form>
@@ -84,6 +84,8 @@
 				var updateFrame = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 				parent.layer.close(updateFrame);  //再改变当前层的标题
 				var url = "<?php echo base_url('bj/modify'); ?>";
+				// console.log("kuangwei---url   ",url);
+				// console.log("kuangwei---updateFrame   ",updateFrame);
 				$.get(url, {'rxpcId':$("#xq").val().toString(),'bjNewName':$("#bjNewName").val().toString()}, 'bjId':"<?php echo $bj['bjId']?>" ,function(data){});
 			});
 			form.verify({
