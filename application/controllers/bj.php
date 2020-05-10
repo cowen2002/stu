@@ -76,9 +76,12 @@ class Bj extends CI_Controller{
 	}
 
 	public function modify(){
-		// $arr['rxpcId'] = $this->input->get('rxpcId');
-		// $arr['bjNewName'] = $this->input->get('bjNewName');
-		// $arr['bjId'] = $this->input->get('bjId');
+		$arr['rxpcId'] = (int)($this->input->get('rxpcId'));
+		$arr['bjNewName'] = $this->input->get('bjNewName');
+		$arr['bjId'] = (int)($this->input->get('bjId'));
+		$this->bj_model->update_bj_by_id($arr);
+		// $this->index();
+
 		// file_put_contents("./Result1.txt",var_export($arr,true));
 	}
 

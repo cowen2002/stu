@@ -50,6 +50,13 @@ class Bj_model extends CI_Model{
 		return $query->row_array();
 	}
 
+	public function update_bj_by_id($arr){
+		$this->db->where('Id', $arr['bjId']);
+		$this->db->update('bj', array('Name'=>$arr['bjNewName'], 'RXPC'=>$arr['rxpcId']));
+	}
+
+
+
 
 
 }
