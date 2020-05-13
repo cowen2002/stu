@@ -19,21 +19,36 @@ class Students_model extends CI_Model{
 		$gzdw = $data['gzdw'];
 		$rxpc = $data['rxpc'];
 		$bj = $data['bj'];
+		// if($rxpc==0){
+		// 	if($bj==0){
+		// 		$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC';		
+		// 	}else{
+		// 		$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC and student.BJ='.$bj;	
+		// 	}
+			
+		// }else{
+		// 	if($bj==0){
+		// 		$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC and student.RXPC='.$rxpc;	
+		// 	}else{
+		// 		$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC and student.BJ='.$bj.' and student.RXPC='.$rxpc;	
+		// 	}
+
+		// };		
 		if($rxpc==0){
 			if($bj==0){
-				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC';		
+				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=bj.RXPC';		
 			}else{
-				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC and student.BJ='.$bj;	
+				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=bj.RXPC and student.BJ='.$bj;	
 			}
 			
 		}else{
 			if($bj==0){
-				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC and student.RXPC='.$rxpc;	
+				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=bj.RXPC and bj.RXPC='.$rxpc;	
 			}else{
-				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=student.RXPC and student.BJ='.$bj.' and student.RXPC='.$rxpc;	
+				$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and student.Name like \'%'.$name.'%\' and student.GZDW like \'%'.$gzdw.'%\' and bj.Id=student.BJ and rxpc.id=bj.RXPC and student.BJ='.$bj.' and bj.RXPC='.$rxpc;	
 			}
 
-		};		
+		};
 		// file_put_contents("./Result1.txt",$sql);
 		$query = $this->db->query($sql);
 		return $query->result_array();
