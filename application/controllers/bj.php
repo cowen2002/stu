@@ -85,4 +85,26 @@ class Bj extends CI_Controller{
 		// file_put_contents("./Result1.txt",var_export($arr,true));
 	}
 
+	public function delete(){
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		$bjId = $this->input->get("bjId");
+		// file_put_contents("./Result1.txt", $bjId);
+		$data['bj'] = $this->bj_model->get_bj_by_id($bjId);
+		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
+		$this->load->view("bj_delete.html", $data);
+	}
+
+	public function do_delete(){
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		$arr['bjId'] = (int)($this->input->get('bjId'));
+		$data['bj'] = $this->bj_model->delete_bj_by_id($arr);
+		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
+	}
+
+
+
 }
