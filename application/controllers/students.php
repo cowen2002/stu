@@ -38,4 +38,16 @@ class Students extends CI_Controller{
 		echo json_encode($arrs);
 	}
 
+
+
+	public function update(){
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		$StudentNo = $this->input->get("StudentNo");
+		file_put_contents("./Result1.txt", $StudentNo);
+		//$data['bj'] = $this->bj_model->get_bj_by_id($bjId);
+		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
+		//$data['rxpc'] = $this->rxpc_model->rxpc_list();
+		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
+		$this->load->view("student_update.html");
+	}
 }

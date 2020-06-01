@@ -23,10 +23,10 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/iconfont.css');?>">
 		<script type="text/javascript" src="<?php echo base_url('application/views/framework/jquery-1.11.3.min.js');?>" ></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/layui/css/layui.css');?>">
-	    <!--[if lt IE 9]>
-	      	<script src="framework/html5shiv.min.js"></script>
-	      	<script src="framework/respond.min.js"></script>
-	    <![endif]-->
+		<!--[if lt IE 9]>
+			<script src="framework/html5shiv.min.js"></script>
+			<script src="framework/respond.min.js"></script>
+		<![endif]-->
 		<script type="text/javascript" src="<?php echo base_url('application/views/layui/layui.js');?>"></script>
 		<!-- 滚动条插件 -->
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('application/views/css/jquery.mCustomScrollbar.css');?>">
@@ -38,7 +38,7 @@
 		
 		<style>
 			.layui-table img {
-			    max-width: none;
+				max-width: none;
 			}
 		</style>
 
@@ -56,37 +56,37 @@
 							<input type="text" name="gzdw" id="gzdw" lay-verify="" placeholder="输入工作单位" autocomplete="off" class="layui-input">
 						</div>						
 						<div class="layui-input-inline">
-		                    <select name="rxpcSwitch" id="rxpcSwitch" lay-filter="formDemo">
-		                        <option value="">选择学期</option>
-		                        <?php foreach($rxpc as $r): ?>
-							      <option value="<?php echo $r['id']; ?>" ><?php echo $r['Name']; ?></option>
-							    <?php endforeach; ?>
-		                    </select>
-		                </div>
-		                <div class="layui-input-inline">
-		                    <select name="bjSwitch" id="bjSwitch" lay-filter="">
-		                        <option value="">选择班级</option>
-		                    </select>
-		                </div>
+							<select name="rxpcSwitch" id="rxpcSwitch" lay-filter="formDemo">
+								<option value="">选择学期</option>
+								<?php foreach($rxpc as $r): ?>
+								  <option value="<?php echo $r['id']; ?>" ><?php echo $r['Name']; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+						<div class="layui-input-inline">
+							<select name="bjSwitch" id="bjSwitch" lay-filter="">
+								<option value="">选择班级</option>
+							</select>
+						</div>
 						<button class="layui-btn" type="button" id="searchStu"  lay-submit lay-filter="formDemo">检索</button>
 						<a class="layui-btn">导入商品</a>
 					</div>
 				</form>
 				<script>
 					 layui.use('form', function() {
-					 	var form = layui.form;
+						var form = layui.form;
 						
-					 	// 监听提交
-					 	// form.on('submit(formDemo)', function(data) {
-					 	// 	layer.msg(JSON.stringify(data.field));
-					 	// 	return true;
-					 	// });
+						// 监听提交
+						// form.on('submit(formDemo)', function(data) {
+						// 	layer.msg(JSON.stringify(data.field));
+						// 	return true;
+						// });
 
-					 	//select change 事件
-					 	form.on('select(formDemo)', function(data) {
-					 		var url = "<?php echo base_url('bj/get_bj_by_rxpcID'); ?>";
-					 		$.get(url, {'rxpcID':data.value}, function(data){$("#bjSwitch").html(data);form.render();});
-					 	});
+						//select change 事件
+						form.on('select(formDemo)', function(data) {
+							var url = "<?php echo base_url('bj/get_bj_by_rxpcID'); ?>";
+							$.get(url, {'rxpcID':data.value}, function(data){$("#bjSwitch").html(data);form.render();});
+						});
 					 });
 				</script>
 			</div>
@@ -115,19 +115,19 @@
 				layui.use('laypage', function() {
 					var laypage = layui.laypage;
 					var arr = <?php echo json_encode($students);?>;
-			    	var aarr = eval(arr);
+					var aarr = eval(arr);
 				
 					//总页数大于页码总数
 					laypage.render({
-					    elem: 'pages'
-					    ,count: <?php echo count($students);?>
-					    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
-					    ,jump: function(obj){
-					    	var tmpstr = "";
-					    	//console.log("hello");
-					    	for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
-					    		var a = aarr[i+obj.limit*(obj.curr-1)];
-					    		tmpstr += "<tr>";
+						elem: 'pages'
+						,count: <?php echo count($students);?>
+						,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+						,jump: function(obj){
+							var tmpstr = "";
+							//console.log("hello");
+							for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
+								var a = aarr[i+obj.limit*(obj.curr-1)];
+								tmpstr += "<tr>";
 								tmpstr += "<td>"+(i+1)+"</td>";
 								tmpstr += "<td>"+a.Name+"</td>";
 								tmpstr += "<td>"+a.Birthday+"</td>";
@@ -136,70 +136,37 @@
 								tmpstr += "<td>"+a.ZZY+"</td>";
 								tmpstr += "<td>"+a.XQ+"</td>";
 								tmpstr += "<td>"+a.BJ+"</td>";
-								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut()\">修改</button>";
-								tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"specificationsBut()\">规格</button></td>";
+								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut(\'"+a.StudentNo+"\')\">修改</button>";
+								tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"deleteBut(\'"+a.StudentNo+"\')\">删除</button></td>";
 								tmpstr += "</tr>";							
 								
 								
-					    	};
-					    	$("#studentsTds").html(tmpstr);
+							};
+							$("#studentsTds").html(tmpstr);
 //					      console.log(obj)
-					    }
+						}
 					});
 				});
-				//修改规格
-				function specificationsBut(){
-					layui.use('layer', function() {
-						var layer = layui.layer;
-						
-						//iframe层-父子操作
-						layer.open({
-							type: 2,
-							area: ['70%', '60%'],
-							fixed: false, //不固定
-							maxmin: true,
-							content: 'specifications_list.html'
-						});
-					});
-					
-				}
-				//修改按钮
-				var updateFrame = null;
-				function updateBut(){
-					layui.use('layer', function() {
-						var layer = layui.layer;
-							
-						//iframe层-父子操作
-						updateFrame = layer.open({
-                    		title: "商品信息修改",
-							type: 2,
-							area: ['70%', '60%'],
-							scrollbar: false,	//默认：true,默认允许浏览器滚动，如果设定scrollbar: false，则屏蔽
-							maxmin: true,
-							content: 'http://www.stu.com/application/views/tgls/goodsManage/goods_update.html'
-						});
-					});
-					
-				}
+			
 
 				//ajax动态获取学员列表
-			  	$("#searchStu").click(function(){
-			  		var url = "<?php echo base_url('students/search'); ?>";
-			  		// layer.msg($("#stuName").val());
-			  		$.get(url, {'name':$("#stuName").val().toString(),'gzdw':$("#gzdw").val().toString(),'rxpc':$("#rxpcSwitch").val(),'bj':$("#bjSwitch").val()}, function(data){
+				$("#searchStu").click(function(){
+					var url = "<?php echo base_url('students/search'); ?>";
+					// layer.msg($("#stuName").val());
+					$.get(url, {'name':$("#stuName").val().toString(),'gzdw':$("#gzdw").val().toString(),'rxpc':$("#rxpcSwitch").val(),'bj':$("#bjSwitch").val()}, function(data){
 						layui.use('laypage', function() {
 							var laypage = layui.laypage;
-					    	var aarr = eval(data);				
+							var aarr = eval(data);				
 							//总页数大于页码总数
 							laypage.render({
-							    elem: 'pages'
-							    ,count: aarr.length
-							    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
-							    ,jump: function(obj){
-							    	var tmpstr = "";
-							    	for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
-							    		var a = aarr[i+obj.limit*(obj.curr-1)];
-							    		tmpstr += "<tr>";
+								elem: 'pages'
+								,count: aarr.length
+								,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+								,jump: function(obj){
+									var tmpstr = "";
+									for(var i=0;(i<obj.limit)&&((i+obj.limit*(obj.curr-1))<obj.count);i++){
+										var a = aarr[i+obj.limit*(obj.curr-1)];
+										tmpstr += "<tr>";
 										tmpstr += "<td>"+(i+1)+"</td>";
 										tmpstr += "<td>"+a.Name+"</td>";
 										tmpstr += "<td>"+a.Birthday+"</td>";
@@ -208,34 +175,69 @@
 										tmpstr += "<td>"+a.ZZY+"</td>";
 										tmpstr += "<td>"+a.XQ+"</td>";
 										tmpstr += "<td>"+a.BJ+"</td>";
-										tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut()\">修改</button>";
-										tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"specificationsBut()\">规格</button></td>";
+										tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut(\'"+a.StudentNo+"\')\">修改</button>";
+										tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"deleteBut(\'"+a.StudentNo+"\')\">规格</button></td>";
 										tmpstr += "</tr>";							
 									};
-							    	$("#studentsTds").html(tmpstr);
+									$("#studentsTds").html(tmpstr);
 		//					      console.log(obj)
-							    }
+								}
 							});//laypage.render
 						});//layui.use
-			  		});
-			  		
-			  	});
+					});
+					
+				});
 
 				//ajax动态获取班级
-			  	// $("#rxpcSwitch").change(function(){
-			  	// 	var url = "<?php echo base_url('bj/get_bj_by_rxpcID'); ?>";
-			  	// 	alert(url);
-			  	// 	// $.get(url, {'rxpcID':this.value}, function(data){$("#bj").html(data);
-			  	// 	// 	alert(data);
-			  	// 	//});
-			  	// });
+				// $("#rxpcSwitch").change(function(){
+				// 	var url = "<?php echo base_url('bj/get_bj_by_rxpcID'); ?>";
+				// 	alert(url);
+				// 	// $.get(url, {'rxpcID':this.value}, function(data){$("#bj").html(data);
+				// 	// 	alert(data);
+				// 	//});
+				// });
 
 
 				// $("#bj").html("<option value=\"333\">第一期省直机关党的建设专题研讨班</option>");
+
+
+
+
+					//删除按钮
+				function deleteBut(e){
+					layui.use('layer', function() {
+						var layer = layui.layer;
+						var tmp = "<?php echo base_url('students/delete?StudentNo="+e+"');?>";
+						//iframe层-父子操作
+						deleteFrame = layer.open({
+                    		title: "删除学员",
+							type: 2,
+							area: ['70%', '60%'],
+							scrollbar: false,	//默认：true,默认允许浏览器滚动，如果设定scrollbar: false，则屏蔽
+							maxmin: true,
+							content: tmp
+						});
+					});
+				};
+
+				//修改按钮
+				function updateBut(e){
+					layui.use('layer', function() {
+						var layer = layui.layer;
+						var tmp = "<?php echo base_url('students/update?StudentNo="+e+"');?>";
+						//iframe层-父子操作
+						updateFrame = layer.open({
+                    		title: "学员信息修改",
+							type: 2,
+							area: ['70%', '60%'],
+							scrollbar: false,	//默认：true,默认允许浏览器滚动，如果设定scrollbar: false，则屏蔽
+							maxmin: true,
+							content: tmp
+						});
+					});					
+				}
+
 			</script>
-
-
-
 
 		</div>
 	</body>

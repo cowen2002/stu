@@ -8,7 +8,7 @@ class Students_model extends CI_Model{
 
 	public function students_list(){
 		// $sql = 'select StudentNo,Name,Birthday,Phone,GZDW,ZZY,BJ from student where IsDel!=1';
-		$sql = 'select student.StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and rxpc.IsDel!=1 and bj.Id=student.BJ and rxpc.id=student.RXPC';
+		$sql = 'select student.StudentNo as StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and rxpc.IsDel!=1 and bj.Id=student.BJ and rxpc.id=student.RXPC';
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
