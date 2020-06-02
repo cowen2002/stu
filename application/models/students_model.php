@@ -8,7 +8,7 @@ class Students_model extends CI_Model{
 
 	public function students_list(){
 		// $sql = 'select StudentNo,Name,Birthday,Phone,GZDW,ZZY,BJ from student where IsDel!=1';
-		$sql = 'select student.StudentNo as StudentNo,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and rxpc.IsDel!=1 and bj.Id=student.BJ and rxpc.id=student.RXPC';
+		$sql = 'select student.Id as id,student.Name,student.Birthday,student.Phone,student.GZDW,student.ZZY,bj.Name as BJ,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and rxpc.IsDel!=1 and bj.Id=student.BJ and rxpc.id=student.RXPC';
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -62,5 +62,13 @@ class Students_model extends CI_Model{
 	// 	$query = $this->db->where($condition)->get('ci_attribute');
 	// 	return $query->result_array();
 	// }
+
+	public function get_student_by_id($id){
+		$sql = "select student.StudentNo,student.Name,student.Birthday,student.Age,student.Sex,student.ZZMM,student.JG,student.SZCS,student.IdCard,student.Phone,student.Tel,student.GZDW,student.ZW,student.ZJ,student.ZC,student.Email,student.QQ,student.WX,student.BJ,student.RXPC,student.RXSJ,student.BYSJ,student.IsYou,student.BJZW,student.ZZY,student.KHDF,student.CreateUser,student.CreateDate,student.IsDel,student.Id,student.HeadImage,student.DXFXCL,student.MZ,student.WHCD,student.GZSJ,student.RDSJ,student.SSFJH,student.IsFinish,student.Remark1,student.Remark2,bj.Name as BJName,rxpc.Name as XQ from student,bj,rxpc where student.IsDel!=1 and bj.IsDel!=1 and bj.Id=student.BJ and rxpc.id=bj.RXPC" ;
+		$query = $this->db->query($sql);
+		return $query->row_array();
+	}
+
+
 
 }

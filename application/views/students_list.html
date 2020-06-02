@@ -136,8 +136,8 @@
 								tmpstr += "<td>"+a.ZZY+"</td>";
 								tmpstr += "<td>"+a.XQ+"</td>";
 								tmpstr += "<td>"+a.BJ+"</td>";
-								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut(\'"+a.StudentNo+"\')\">修改</button>";
-								tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"deleteBut(\'"+a.StudentNo+"\')\">删除</button></td>";
+								tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut(\'"+a.id+"\')\">修改</button>";
+								tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"deleteBut(\'"+a.id+"\')\">删除</button></td>";
 								tmpstr += "</tr>";							
 								
 								
@@ -175,8 +175,8 @@
 										tmpstr += "<td>"+a.ZZY+"</td>";
 										tmpstr += "<td>"+a.XQ+"</td>";
 										tmpstr += "<td>"+a.BJ+"</td>";
-										tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut(\'"+a.StudentNo+"\')\">修改</button>";
-										tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"deleteBut(\'"+a.StudentNo+"\')\">规格</button></td>";
+										tmpstr += "<td><button class=\"layui-btn layui-btn-xs\" onclick=\"updateBut(\'"+a.id+"\')\">修改</button>";
+										tmpstr += "<button class=\"layui-btn layui-btn-xs\" onclick=\"deleteBut(\'"+a.id+"\')\">规格</button></td>";
 										tmpstr += "</tr>";							
 									};
 									$("#studentsTds").html(tmpstr);
@@ -207,7 +207,7 @@
 				function deleteBut(e){
 					layui.use('layer', function() {
 						var layer = layui.layer;
-						var tmp = "<?php echo base_url('students/delete?StudentNo="+e+"');?>";
+						var tmp = "<?php echo base_url('students/delete?id="+e+"');?>";
 						//iframe层-父子操作
 						deleteFrame = layer.open({
                     		title: "删除学员",
@@ -224,7 +224,7 @@
 				function updateBut(e){
 					layui.use('layer', function() {
 						var layer = layui.layer;
-						var tmp = "<?php echo base_url('students/update?StudentNo="+e+"');?>";
+						var tmp = "<?php echo base_url('students/update?id="+e+"');?>";
 						//iframe层-父子操作
 						updateFrame = layer.open({
                     		title: "学员信息修改",
