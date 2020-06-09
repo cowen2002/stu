@@ -50,29 +50,22 @@ class Students extends CI_Controller{
 	}
 	
 	public function modify(){
-		$data['StudentNo']  = $this->input->get('StudentNo');
-		$data['Name']       = $this->input->get('Name');
-		$data['Birthday']   = $this->input->get('Birthday');
-		$data['Sex']        = $this->input->get('Sex');
-		$data['ZZMM']       = $this->input->get('ZZMM');
-		$data['JG']         = $this->input->get('JG');
-		$data['SZCS']       = $this->input->get('SZCS');
-		$data['IdCard']     = $this->input->get('IdCard');
-		$data['Phone']      = $this->input->get('Phone');
-		$data['Tel']        = $this->input->get('Tel');
-		$data['GZDW']       = $this->input->get('GZDW');
-		$data['BJName']     = $this->input->get('BJName');
-		$data['XQ']         = $this->input->get('XQ');
-		$data['ZZY']        = $this->input->get('ZZY');
-		$data['Remark1']    = $this->input->get('Remark1');
-		$data['Remark2']    = $this->input->get('Remark2');
-		$data['id']         = $this->input->get('id');
-
-
-
-
-
-		file_put_contents("./Result1.txt", var_export($data,true));
+		$arr['StudentNo']  = $this->input->get('StudentNo');
+		$arr['Name']       = $this->input->get('Name');
+		$arr['Birthday']   = $this->input->get('Birthday');
+		$arr['Sex']        = $this->input->get('Sex');
+		$arr['ZZMM']       = $this->input->get('ZZMM');
+		$arr['JG']         = $this->input->get('JG');
+		$arr['SZCS']       = $this->input->get('SZCS');
+		$arr['IdCard']     = $this->input->get('IdCard');
+		$arr['Phone']      = $this->input->get('Phone');
+		$arr['Tel']        = $this->input->get('Tel');
+		$arr['GZDW']       = $this->input->get('GZDW');
+		$arr['ZZY']        = $this->input->get('ZZY');
+		$arr['Remark1']    = $this->input->get('Remark1');
+		$arr['Remark2']    = $this->input->get('Remark2');
+		$id                = $this->input->get('id');
+		$this->students_model->update_student_by_id($id, $arr);
 	}
 	
 	

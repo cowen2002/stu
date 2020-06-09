@@ -69,6 +69,11 @@ class Students_model extends CI_Model{
 		return $query->row_array();
 	}
 
+	public function update_student_by_id($id, $arr){
+		file_put_contents("./Result1.txt", var_export($arr,true));
+		$this->db->where('Id', $id);
+		$this->db->update('student', $arr);
+	}
 
 
 }
