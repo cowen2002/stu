@@ -70,9 +70,15 @@ class Students_model extends CI_Model{
 	}
 
 	public function update_student_by_id($id, $arr){
-		file_put_contents("./Result1.txt", var_export($arr,true));
+		// file_put_contents("./Result1.txt", var_export($arr,true));
 		$this->db->where('Id', $id);
 		$this->db->update('student', $arr);
+	}
+
+	public function delete_student_by_id($id){
+		// file_put_contents("./Result1.txt", var_export($arr,true));
+		$this->db->where('Id', $id);
+		$this->db->update('student', array('IsDel'=>1));
 	}
 
 

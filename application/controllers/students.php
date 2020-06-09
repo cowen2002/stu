@@ -68,5 +68,32 @@ class Students extends CI_Controller{
 		$this->students_model->update_student_by_id($id, $arr);
 	}
 	
+
+	public function delete(){
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		$data['id'] = $this->input->get("id");
+		// file_put_contents("./Result1.txt", $bjId);
+		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
+		$this->load->view("student_delete.html", $data);
+	}
+
+	public function do_delete(){
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		$id = (int)($this->input->get('id'));
+
+		$this->students_model->delete_student_by_id($id);
+		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
+		// file_put_contents("./Result1.txt",$id);
+		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
+		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
+	}
+
+	
+	public function batInput(){
+		file_put_contents("./Result1.txt",'hello world');
+		
+	}
 	
 }
