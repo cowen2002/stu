@@ -92,8 +92,31 @@ class Students extends CI_Controller{
 
 	
 	public function batInput(){
-		file_put_contents("./Result1.txt",'hello world');
-		
+		// file_put_contents("./Result1.txt",'hello world');
+		$result = ['error_code'=> 0, 'error_msg'=>'success', 'data'=> []];
+		if (!file_exists('upload/test.xlsx')){
+			$result['error_code'] = 1;
+			$result['error_msg'] = '文件不存在';
+			return;
+		}
+		file_put_contents("./Result1.txt","1;",FILE_APPEND);
+		$this->load->library("PHPExcel"); //加载类
+		file_put_contents("./Result1.txt","2;",FILE_APPEND);
+		$this->load->library("PHPExcel/IOFactory");
+		file_put_contents("./Result1.txt","3;",FILE_APPEND);
+		$objReader = IOFactory::createReader('Excel2007');
+		file_put_contents("./Result1.txt","4;",FILE_APPEND);
+		$objPHPExcel = $objReader->load('upload/test.xlsx');
+		file_put_contents("./Result1.txt","5;",FILE_APPEND);
+		$sheet = $objPHPExcel->getSheet(0); // 读取第一个工作表
+		file_put_contents("./Result1.txt","6;",FILE_APPEND);
+		$highestRow = $sheet->getHighestRow(); //获取行数
+		file_put_contents("./Result1.txt","7;",FILE_APPEND);
+		$highestColumn = $sheet->getHighestColumn(); //获取列数 
+		file_put_contents("./Result1.txt","8;",FILE_APPEND);
+		$tmp = "highestRow:".$highestRow.";highestColumn:".$highestColumn;
+		file_put_contents("./Result1.txt",$tmp,FILE_APPEND);
+		file_put_contents("./Result1.txt","world;",FILE_APPEND);
 	}
-	
+
 }
