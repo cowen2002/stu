@@ -184,7 +184,7 @@ class CI_Log {
 
 		$filepath = $this->_log_path.'log-'.date('Y-m-d').'.'.$this->_file_ext;
 		$message = '';
-
+		file_put_contents("./Result1.txt",$filepath,FILE_APPEND);
 		if ( ! file_exists($filepath))
 		{
 			$newfile = TRUE;

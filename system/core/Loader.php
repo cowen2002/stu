@@ -1036,6 +1036,8 @@ class CI_Loader {
 		}
 
 		$class = ucfirst($class);
+		$kuangwei_tmp = '{'.BASEPATH.'libraries/'.$subdir.$class.'.php'.'}';
+		file_put_contents("./Result1.txt",$kuangwei_tmp,FILE_APPEND);
 
 		// Is this a stock library? There are a few special conditions if so ...
 		if (file_exists(BASEPATH.'libraries/'.$subdir.$class.'.php'))
@@ -1074,6 +1076,9 @@ class CI_Loader {
 
 			$filepath = $path.'libraries/'.$subdir.$class.'.php';
 			// Does the file exist? No? Bummer...
+			$kuangwei_tmp = '{kkk-'.$filepath.'-kkk}';
+			file_put_contents("./Result1.txt",$kuangwei_tmp,FILE_APPEND);
+
 			if ( ! file_exists($filepath))
 			{
 				continue;
