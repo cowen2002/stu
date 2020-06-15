@@ -16,7 +16,6 @@ class Rxpc_model extends CI_Model{
 		// $sql = 'select StudentNo,Name,Birthday,Phone,GZDW,ZZY,BJ from student where IsDel!=1';
 		$this->db->where('Name', $rxpcName);
 		$query = $this->db->get('rxpc');
-		// file_put_contents("./Result1.txt",var_export($query->result(),true));
 		if(count($query->result())>0){
 			return 2;
 		}

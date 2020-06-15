@@ -847,3 +847,25 @@ if ( ! function_exists('function_usable'))
 		return FALSE;
 	}
 }
+// ------------------------------------------------------------------------
+define('KLOGOPEN', 'YES');
+if ( ! function_exists('klog'))
+{
+	/**
+	 * klog
+	 *
+	 * kuangwei add log function. output log message to your log 
+	 * file.
+	 *
+	 * @param	string	$msg	log message you want to output.
+	 * @param	string	$file	log file name.
+	 * @param	string	$line	line No. 
+	 * @param	string	$fileName	log file name.
+	 * @return	null
+	 */
+	function klog($msg, $file, $line, $logFileName = './Result1.txt')
+	{
+		$s = "\r message: ".$msg."\r file：".$file."\r line:".$line."\r";
+		defined('KLOGOPEN') AND file_put_contents($logFileName, $s, FILE_APPEND);
+	}
+}

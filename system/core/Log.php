@@ -121,7 +121,7 @@ class CI_Log {
 	public function __construct()
 	{
 		$config =& get_config();
-
+		date_default_timezone_set("PRC");//设置时区
 		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
 
 		$this->_log_path = ($config['log_path'] !== '') ? $config['log_path'] : APPPATH.'logs/';
@@ -184,7 +184,6 @@ class CI_Log {
 
 		$filepath = $this->_log_path.'log-'.date('Y-m-d').'.'.$this->_file_ext;
 		$message = '';
-		file_put_contents("./Result1.txt",$filepath,FILE_APPEND);
 		if ( ! file_exists($filepath))
 		{
 			$newfile = TRUE;
@@ -216,6 +215,7 @@ class CI_Log {
 		}
 
 		$message .= $this->_format_line($level, $date, $msg);
+
 
 		for ($written = 0, $length = self::strlen($message); $written < $length; $written += $result)
 		{

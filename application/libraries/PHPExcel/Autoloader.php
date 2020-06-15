@@ -75,7 +75,6 @@ class PHPExcel_Autoloader
             // Can't load
             return false;
         }
-
         require($pClassFilePath);
     }
 }

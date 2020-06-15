@@ -10,7 +10,6 @@ class Bj extends CI_Controller{
 	
 	public function index(){
 		$data['bjs'] = $this->bj_model->rxpc_bj_list();
-		// file_put_contents("./Result1.txt",var_export($data,true));
 		$this->load->view("bj.html",$data);
 	}
 
@@ -21,7 +20,6 @@ class Bj extends CI_Controller{
 		foreach ($arrs as $a) {
 			$html .= "<option value=\"".$a['Id']."\">".$a['Name']."</option>";			
 		};
-		//file_put_contents("./Result1.txt",$html,FILE_APPEND);
 		echo $html;
 	}
 
@@ -29,7 +27,6 @@ class Bj extends CI_Controller{
 		$arr['rxpcName'] = $this->input->get('rxpcName');
 		$arr['bjName'] = $this->input->get('bjName');
 		$data = $this->bj_model->search_bj($arr);
-		//file_put_contents("./Result1.txt",var_export($data,true));
 		echo json_encode($data);
 	}
 
@@ -49,7 +46,6 @@ class Bj extends CI_Controller{
 			echo "请输入班级名称！";
 			return;
 		}
-		// file_put_contents("./Result1.txt",var_export($arr,true));
 		$re = $this->bj_model->insert($arr);
 		switch($re){
 			case 1:
@@ -67,11 +63,8 @@ class Bj extends CI_Controller{
 	public function update(){
 		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
 		$bjId = $this->input->get("bjId");
-		// file_put_contents("./Result1.txt", $bjId);
 		$data['bj'] = $this->bj_model->get_bj_by_id($bjId);
-		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
 		$data['rxpc'] = $this->rxpc_model->rxpc_list();
-		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
 		$this->load->view("bj_update.html", $data);
 	}
 
@@ -82,17 +75,13 @@ class Bj extends CI_Controller{
 		$this->bj_model->update_bj_by_id($arr);
 		// $this->index();
 
-		// file_put_contents("./Result1.txt",var_export($arr,true));
 	}
 
 	public function delete(){
 		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
 		$bjId = $this->input->get("bjId");
-		// file_put_contents("./Result1.txt", $bjId);
 		$data['bj'] = $this->bj_model->get_bj_by_id($bjId);
-		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
 		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
-		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
 		$this->load->view("bj_delete.html", $data);
 	}
 
@@ -100,9 +89,7 @@ class Bj extends CI_Controller{
 		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
 		$arr['bjId'] = (int)($this->input->get('bjId'));
 		$data['bj'] = $this->bj_model->delete_bj_by_id($arr);
-		 // file_put_contents("./Result1.txt",var_export($data['bj'],true));
 		// $data['rxpc'] = $this->rxpc_model->rxpc_list();
-		 // file_put_contents("./Result1.txt",var_export($data['bjId'],true), FILE_APPEND);
 	}
 
 

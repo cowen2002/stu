@@ -8,19 +8,16 @@ class Rxpc extends CI_Controller{
 	}
 	
 	public function add(){
-		// file_put_contents("./Result1.txt",var_export($data,true));
 		$this->load->view("rxpc_add.html");
 	}
 
 	public function addRxpc(){
-		// file_put_contents("./Result1.txt",var_export($data,true));
 		$rxpcName = $this->input->get('rxpcName');
 		if($rxpcName == ''){
 			echo "请输入学期名称！";
 			return;
 		}
 		$re = $this->rxpc_model->insert($rxpcName);
-		// file_put_contents("./Result1.txt",$re);
 		switch($re){
 			case 1:
 				echo "新建学期".$rxpcName."成功!";
