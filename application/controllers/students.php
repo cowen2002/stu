@@ -81,18 +81,20 @@ class Students extends CI_Controller{
 	}
 
 	
-	public function batInput(){
-		$result = ['error_code'=> 0, 'error_msg'=>'success', 'data'=> []];
-		if (!file_exists('upload/test.xlsx')){
-			$result['error_code'] = 1;
-			$result['error_msg'] = '文件不存在';
-			return;
-		}
-		klog("my log test.", __FILE__, __LINE__);
-		$this->load->library("PHPExcel"); //加载类
-		$objPHPExcel = PHPExcel_IOFactory::load('upload/test.xlsx');
-		$s = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0, 1)->getValue();
-		klog($s,__FILE__, __LINE__);
+	public function batHandle(){
+		$this->load->view("student_bat_handle.html");
+
+		// $result = ['error_code'=> 0, 'error_msg'=>'success', 'data'=> []];
+		// if (!file_exists('upload/test.xlsx')){
+		// 	$result['error_code'] = 1;
+		// 	$result['error_msg'] = '文件不存在';
+		// 	return;
+		// }
+		// klog("my log test.", __FILE__, __LINE__);
+		// $this->load->library("PHPExcel"); //加载类
+		// $objPHPExcel = PHPExcel_IOFactory::load('upload/test.xlsx');
+		// $s = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow(0, 1)->getValue();
+		// klog($s,__FILE__, __LINE__);
 
 
 		// $objReader = IOFactory::createReader('Excel2007');
